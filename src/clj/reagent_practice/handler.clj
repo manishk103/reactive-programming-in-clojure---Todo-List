@@ -6,7 +6,8 @@
             [hiccup.page :refer [include-js include-css]]
             [prone.middleware :refer [wrap-exceptions]]
             [ring.middleware.reload :refer [wrap-reload]]
-            [environ.core :refer [env]]))
+            [environ.core :refer [env]]
+            [reagent-practice.database :refer :all]))
 
 (def mount-target
   [:div#app
@@ -32,7 +33,7 @@ map
 (defroutes routes
   (GET "/" [] home-page)
 
-  (GET "/data" [] "[1 2 3]")
+  (GET "/notes" [] (prn-str (get-notes)))
 
   (resources "/")
   (not-found "Not Found"))

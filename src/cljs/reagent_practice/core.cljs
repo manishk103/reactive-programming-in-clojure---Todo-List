@@ -26,7 +26,7 @@
    [:h "Todo List"]
    [:ul {:style {:font-size "14px"}}
     (for [[idx note] (map-indexed #(list %1 %2) @notes)]
-      [:li {:onClick #(delete-note! idx)}
+      [:li {:onClick (fn [] (delete-note! idx))}
         note])]
    [:input#note {:style {:margin-right "2px"}}]
    [:button {:onClick save-note!}
