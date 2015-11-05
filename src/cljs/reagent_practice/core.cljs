@@ -9,6 +9,9 @@
 (defn save-note! []
   (swap! notes conj (get-value-by-id "note")))
 
+(defn remove-last-note! []
+  (swap! notes rest))
+
 (defn home-page []
   [:div {:style {:padding "15px"
                  :border "1px solid"
@@ -21,7 +24,9 @@
       [:li note ])]
    [:input#note {:style {:margin-right "2px"}}]
    [:button {:onClick save-note!}
-    "Add "]])
+    "Add "]
+   [:button {:onClick remove-last-note!}
+    "Delete "]])
 
 ;; Initialize app
 (defn mount-root []
@@ -29,3 +34,15 @@
 
 (defn init! []
   (mount-root))
+
+;;(conj coll (defer atm ()))
+
+(def atom-val-del (atom []))
+
+;;(reset! atom-val-del 12)
+(swap! atom-val-del rest)
+(deref atom-val-del)
+
+
+
+
