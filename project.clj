@@ -18,7 +18,7 @@
                  [org.clojure/clojurescript "1.7.145" :scope "provided"]
                  [secretary "1.2.3"]
                  [com.novemberain/monger "3.0.1"]
-                 ]
+                 [cljs-ajax "0.2.6"]]
 
   :plugins [[lein-environ "1.0.1"]
             [lein-asset-minifier "0.2.2"]]
