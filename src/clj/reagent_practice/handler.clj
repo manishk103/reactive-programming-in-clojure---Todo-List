@@ -9,13 +9,6 @@
             [environ.core :refer [env]]
             [reagent-practice.database :refer :all]))
 
-(def mount-target
-  [:div#app
-      [:h3 "ClojureScript has not been compiled!"]
-      [:p "please run "
-       [:b "lein figwheel"]
-       " in order to start the compiler"]])
-
 (def home-page
   (html
    [:html
@@ -25,15 +18,25 @@
              :content "width=device-width, initial-scale=1"}]
      (include-css (if (env :dev) "css/site.css" "css/site.min.css"))]
     [:body
-     mount-target
+     [:div#app]
      (include-js "js/app.js")]]))
-
-map
 
 (defroutes routes
   (GET "/" [] home-page)
 
-  (GET "/notes" [] (prn-str (get-notes)))
+  (GET "/notes" []
+    (prn-str {:notes (get-notes)}))
+
+  (GET "/save-note" [note]
+    (prn-str {:_id (save-note! note)}))
+
+  (GET "/delete-note" [id]
+    (let [resp {:success true}]
+      (delete-note! id)
+      (prn-str resp)))
+
+  (GET "/get-note-by-id" [id]
+    (prn-str (get-note-by-id id)))
 
   (resources "/")
   (not-found "Not Found"))
